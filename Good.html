@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kirubel Melaku </title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+        rel="stylesheet"
+    />
+    <style>
+        /* General Setup and Variables */
+        :root {
+            /* Dark Backgrounds */
+            --primary-bg: #121212; 
+            --secondary-bg: #1e1e1e;
+            /* High-Contrast Accent */
+            --accent-color: #00bcd4; /* Cyan/Blue */
+            --text-light: #e0e0e0;
+            --text-muted: #9e9e9e;
+            --font-stack: 'Montserrat', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Utility classes */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            padding: 80px 20px;
+            min-height: 80vh; 
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* Header and Navigation (Fixed Top Bar) */
+        header {
+            background-color: var(--primary-bg);
+            border-bottom: 3px solid var(--accent-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0%;
+        }
+        
+        .logo-text {
+            color: var(--accent-color);
+            font-size: 1.5em;
+            font-weight: 800;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            transition: color 0.3s, border-bottom 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* 1. Home Section - SPLIT LAYOUT */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--secondary-bg);
+            border-bottom: 1px solid #333;
+        }
+
+        .home-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two Equal Columns */
+            gap: 50px;
+            align-items: center;
+        }
+
+        .home-photo-container {
+            text-align: center;
+        }
+
+        .home-photo {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid var(--accent-color);
+            box-shadow: 0 0 40px var(--accent-color) inset;
+        }
+
+        .home-text h1 {
+            font-size: 4em;
+            margin-bottom: 0;
+            line-height: 1.1;
+        }
+        
+        .home-text h1 span {
+            color: var(--accent-color);
+        }
+        
+        .home-text h3 {
+            font-size: 1.5em;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+        
+        .social-icons {
+            margin-top: 30px;
+        }
+        
+        .social-icons a {
+            color: var(--text-light);
+            font-size: 2.5em;
+            margin-right: 20px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .social-icons a i{
+            font-size: 20px;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* 2. About Section */
+        #about {
+            background-color: var(--primary-bg);
+            text-align: center;
+        }
+        
+        #about h2 {
+            font-size: 2.5em;
+            color: var(--accent-color);
+            margin-bottom: 50px;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 40px;
+            text-align: left;
+        }
+        
+        .profile-summary {
+            flex: 2; /* Takes more space for the summary */
+           margin-bottom: 10px;
+        }
+        
+        .skills-summary {
+            flex: 1; /* Takes less space for the list */
+            background-color: var(--secondary-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .skills-summary ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .skills-summary li {
+            background-color: #2a2a2a;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+        }
+        
+        /* 3. Projects Section - CARD LAYOUT */
+        #projects {
+            background-color: var(--secondary-bg);
+            padding-bottom: 100px;
+        }
+        
+        #projects h2 {
+            color: var(--accent-color);
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: var(--primary-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #333;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.4);
+        }
+
+        .project-card h3 {
+            color: var(--accent-color);
+            border-bottom: 2px dashed var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .project-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-details li {
+            padding: 8px 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .project-details li strong {
+            color: var(--accent-color);
+            margin-right: 10px;
+            min-width: 100px;
+            display: inline-block;
+        }
+
+
+        /* 4. Contact Section */
+        #contact {
+            background-color: var(--primary-bg);
+            text-align: center;
+        }
+        
+        #contact h2 {
+            color: var(--accent-color);
+            font-size: 2.5em;
+        }
+
+        #contactForm {
+            max-width: 500px;
+            margin: 40px auto 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #contactForm input, #contactForm textarea {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--secondary-bg);
+            color: var(--text-light);
+            font-size: 1em;
+            border: 1px solid #444;
+        }
+
+        #contactForm input:focus, #contactForm textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        #contactForm button {
+            padding: 15px;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #contactForm button:hover {
+            background-color: #008fa3;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #333;
+        }
+        
+        .footer-details {
+            margin-top: 20px;
+            color: var(--text-muted);
+        }
+
+        .footer-details li {
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .home-content, .about-content {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .home-photo {
+               width: 100%;
+  height: 100%;
+  object-fit: cover; 
+            }
+            
+            .home-text h1 {
+                font-size: 3em;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        #heven{
+               
+            position: relative;
+    width: 30vw;
+    height: 30vw;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #fff;
+    overflow: hidden;
+        
+        }
+        #logo2{
+             position: relative;
+    width: 10vw;
+    height: 10vw;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #fff;
+    overflow: hidden;
+        }
+        #logo2 img{
+           
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* Ensures it fills the circle without distortion */
+
+        }
+        #hev{
+            
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* Ensures it fills the circle without distortion */
+
+        }
+     /* Center the main title */
+#pro {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #06b9e6;
+  font-weight: 600;
+}
+
+/* Projects grid layout */
+.projects-grid {
+  display: flex;
+  justify-content:center;    /* Centers horizontally */
+  align-items: stretch;       /* Makes all same height */
+  gap: 10px;                  /* Spacing between cards */
+  flex-wrap: wrap;            /* Wraps on small screens */
+  padding: 10px 30px;
+}
+
+/* Individual project card */
+.project {
+  flex: 1 1 300px;            /* Responsive card width */
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  max-width: 300px;
+}
+
+/* Hover animation */
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Project title */
+.project h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Project text */
+.project p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Download link */
+#down {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: #0078d4;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+#down:hover {
+  background-color: #0bf5af;
+}
+.contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+ .footer-icons {
+            margin-top: 30px;
+        }
+        
+        .footer-icons a {
+            color: var(--text-light);
+            font-size: 2.5em;
+            margin-right: 20px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .footer-icons a:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+        .footer-links a {
+            color: rgb(17, 0, 255);
+            background-color: rgb(164, 106, 106);
+            padding: 10px;
+        }
+        .footer-links a:hover{
+            color: gold;
+        }
+        #footer{
+            margin-bottom: 0%;
+        }
+    </style>
+    </head>
+<body>
+
+    <header>
+        <div id="logo2"><img src="Logo.jpg" alt=""></div>
+        <div class="logo-text">KIRUBEL MELAKU PORTFOLIO </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <section id="home" class="container">
+        <div class="home-content">
+            <div class="home-photo-container">
+                <img src="kal.jpg" class="home-photo" alt="My Profile Photo" /> 
+            </div>
+            
+            <div class="home-text">
+                <h1>Hello, I'm <br><span>Kirubel Melaku</span>.</h1>
+                <h3>Front-End Developer & Computer Science Student</h3>
+                <p>I specialize in competitive programming, object-oriented design, and robust database management. I'm currently focused on building responsive web solutions at the University of Gondar (UOG).</p>
+                
+                <div class="social-icons">
+                    <a href="https://github.com/kirubelmelaku454-sudo" target="_blank" aria-label="GitHub"><i class="ri-github-fill"></i></a>
+                    <a href="https://www.linkedin.com/in/kirubel-melaku" target="_blank" aria-label="LinkedIn"><i class="ri-linkedin-box-fill"></i></a>
+                    <a href="https://www.youtube.com/@KirubelMelaku-jn1yf" target="_blank" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <div class="profile-summary">
+         <p>I am Kirubel Melaku, a passionate Computer Science student driven by a desire to solve complex problems through software. My academic journey has equipped me with a strong foundation in core programming principles, data structures, and system design.</p>
+                <p style="margin-top: 20px;">I am actively expanding my skillset beyond my current knowledge base to become a full-stack developer. My project work demonstrates my ability to not only write front-end code (HTML, CSS, JS) but also manage complex backend logic and databases.</p>
+                </div>
+                <hr><hr>
+        <div class="about-content">
+            
+                
+            <div id="heven">
+                <img src="heven.png" id="hev" alt="">
+            </div>
+            <div class="skills-summary">
+                <h3>Technical Proficiencies</h3>
+                
+                <h4>Core Skills (Learned)</h4>
+                <ul>
+                    <li>HTML, CSS, JavaScript</li>
+                    <li>C++ (Object-Oriented Programming)</li>
+                    <li>SQL (Database Design, Stored Procedures)</li>
+                </ul>
+                <hr><hr><hr>
+                <h4 style="margin-top: 20px;">Current Focus (Learning)</h4>
+                <ul>
+                    <li>Responsive Web Design</li>
+                    <li>Advanced Front-End Frameworks</li>
+                    <li>Back-End Development (e.g., Node.js or Python)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section id="projects" class="container">
+        <h2>Featured Projects</h2>
+        
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <h3>ATM Transaction System (C++)</h3>
+                <p>A secure, console-based simulation demonstrating C++ fundamentals, data structures, and file handling for logging. </p>
+                <div class="project-details" style="margin-top: 20px;">
+                    <ul>
+                        <li><strong>Implementation:</strong> C++ with File I/O.</li>
+                        <li><strong>Data Structure:</strong> Implemented a Linked List to manage and display per-account transaction history.</li>
+                        <li><strong>Key Features:</strong> User Authentication, Fund Transfers (Same/Other Bank), Transaction Search, and Sorting.</li>
+                        <li><strong>Code Reference:</strong> `Algorithm.cpp` (View on GitHub)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Library Management System (SQL)</h3>
+                <p>Design and administration of a fully normalized, relational database schema for a library's operational needs.</p>
+                <div class="project-details" style="margin-top: 20px;">
+                    <ul>
+                        <li><strong>Implementation:</strong> Advanced SQL (DDL, DML, TCL, DCL).</li>
+                        <li><strong>Schema:</strong> 10 Normalized Tables (e.g., Book, Member, FinePenalty) with enforced Foreign Keys.</li>
+                        <li><strong>Database Logic:</strong> Created a Stored Function, a Stored Procedure, and a Trigger for data recovery.</li>
+                        <li><strong>Control:</strong> Demonstrated TCL (COMMIT/ROLLBACK) and DCL (GRANT/REVOKE) commands.</li>
+                        <li><strong>Code Reference:</strong> `Database.txt` (View on GitHub)</li>
+                    </ul>
+                </div>
+            </div>
+             <div class="project-card">
+            <h3>Library Management System (Java - OOP Implementation)</h3>
+            <p>
+                A console-based library management system developed in Java using Object-Oriented Programming (OOP) principles.
+                It demonstrates encapsulation, inheritance, abstraction, and polymorphism in managing books, magazines, and members with file persistence.
+            </p>
+            <div class="project-details" style="margin-top: 20px;">
+                <ul>
+                    <li><strong>Implementation:</strong> Java (Object-Oriented Design with File Serialization for persistent data storage).</li>
+                    <li><strong>Core Classes:</strong> <code>LibraryItem</code>, <code>Book</code>, <code>Magazine</code>, <code>Member</code>, and <code>LibraryManagementSystem</code>.</li>
+                    <li><strong>Data Management:</strong> Stores and retrieves all records (Books, Magazines, Members, Borrow/Return logs) using serialized files.</li>
+                    <li><strong>OOP Concepts:</strong> Demonstrates <em>Encapsulation</em>, <em>Inheritance</em>, <em>Abstraction</em>, and <em>Polymorphism</em>.</li>
+                    <li><strong>Key Features:</strong> Admin Login, Member Registration, Borrow & Return Management, Auto-ID Generation, Quantity Updates, and Lost Item Tracking.</li>
+                    <li><strong>Code Reference:</strong> <code>LibraryManagementSystem.java</code> (View on GitHub)</li>
+                </ul>
+            </div>
+           
+        </div>
+        
+             <h1 id="pro">Projects</h1
+
+            <div class="projects-grid" >
+                <div class="project sql">
+                    <h3>Project One</h3>
+                    <p>Library Management System <br> Database SQL code <br> <a href="Database.txt" download id="down">Download SQL </a></p>
+                </div>
+                <div class="project java">
+                    <h3>Project Two</h3>
+                    <p>Library Management System <br> Java code <br> <a href="Oop.txt" download id="down">Download Java </a></p>
+                </div>
+                <div class="project cpp">
+                    <h3>Project Three</h3>
+                    <p>Automatic Teller Machine <br> C++ code <br> <a href="Algorithm.cpp" download id="down">Download c++ </a></p>
+                </div>
+                
+             </div>
+         
+        
+        </div>
+        
+    </section>
+    <section id="contact" class="container">
+        <h2>Get In Touch</h2>
+        <p>I am available for new opportunities, collaborations, and discussions on C++ and web development. Send me a message!</p>
+     <div>
+            <div>
+        <form id="contactForm" action="#" method="POST"> 
+            <input type="text" name="name" placeholder="Your Name" required/>
+            <input type="email" name="email" placeholder="Your Email" required/>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        </div>
+        <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">✉</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>kirubelmelaku454@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+251931058886</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>University of Gondar, Ethiopia</p>
+                        </div>
+                    </div>
+         </div>
+    </section>
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home" data-section="home">Home</a>
+                <a href="#about" data-section="about">About</a>
+                <a href="#projects" data-section="projects">Projects</a>
+                <a href="#contact" data-section="contact">Contact</a>
+            </div><br>
+        <hr>
+  <p class="copyright">© 2025 Kirubel Melaku. All rights reserved.</p>
+  <div class="footer-icons">
+    <p>contact me </p>
+  <a href="https://web.facebook.com/profile.php?id=100073725009377" target="_blank" aria-label="facebook"><i class="ri-facebook-fill"></i></a>
+    <a href="https://t.me/Kirubel_1221" target="_blank" aria-label="telegram"><i class="ri-telegram-fill"></i></a>
+    <a href="https://www.instagram.com/kirubelmelakunecho/" target="_blank" aria-label="instagram"><i class="ri-instagram-fill"></i></a>
+
+  </div>
+</footer>
+    <script>
+       document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message sent! I will get back to you shortly.');
+            this.reset();
+        });
+         /*document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const status = document.getElementById('statusMessage');
+            status.textContent = 'Message sent! I will get back to you shortly.';
+            // In a real application, you would send data to a backend service here.
+            this.reset();
+        });*/
+    </script>
+</body>
+</html>
